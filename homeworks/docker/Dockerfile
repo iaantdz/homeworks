@@ -8,6 +8,10 @@ RUN /bin/bash -c 'cd /tmp;\
 	mvn package;\
    	cd target/;\
      	cp hello-1.0.war /var/lib/tomcat9/webapps/'
+ENV CATALINA_HOME=/usr/share/tomcat9
+ENV CATALINA_BASE=/var/lib/tomcat9
+ENV CATALINA_TMPDIR=/tmp
 EXPOSE 8080
-CMD service tomcat9 start && tail -f /var/lib/tomcat9/logs/catalina.out
+
+CMD /usr/share/tomcat9/bin/catalina.sh run
 
