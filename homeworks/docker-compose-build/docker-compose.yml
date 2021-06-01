@@ -1,14 +1,11 @@
 ---
 version: "3"
-volumes:
-  builddata:
-    external: true
 
 services:
   builder:
     build: maven-app
     volumes:
-      - builddata:/tmp/
+      - /tmp:/tmp/
   runner:
     build: tomcat-app
     volumes_from:

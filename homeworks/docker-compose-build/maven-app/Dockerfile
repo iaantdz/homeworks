@@ -1,5 +1,4 @@
 FROM ubuntu:20.04
-VOLUME builddata:/tmp
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN  apt-get update && apt -y install default-jdk tomcat9 maven git
@@ -9,5 +8,4 @@ RUN /bin/bash -c 'cd /tmp;\
 	mvn package;\
 	cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war /tmp/'
 
-CMD "bash"
 
