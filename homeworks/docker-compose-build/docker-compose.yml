@@ -5,11 +5,7 @@ services:
     build: maven-app
     volumes:
       - /tmp/:/tmp/
-    volumes_from:
-      - runner
   runner:
     build: tomcat-app
-    volumes:
-      - /tmp/:/tmp/
     volumes_from:
       - builder
