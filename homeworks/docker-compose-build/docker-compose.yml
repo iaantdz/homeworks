@@ -4,12 +4,10 @@ services:
   builder:
     build: maven-app
     volumes:
-      - bld:/tmp/build
+      - /tmp/:/tmp/
   runner:
     build: tomcat-app
     volumes:
-      - bld:/tmp
+      - /tmp/:/tmp/
     volumes_from:
       - builder
-volumes:
-  bld:
