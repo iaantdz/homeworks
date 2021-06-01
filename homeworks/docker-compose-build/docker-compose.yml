@@ -7,14 +7,14 @@ services:
     volumes:
       - type: volume
         source: builddata
-        target: /tmp
+        target: /builddata
 
   runner:
     build: tomcat-app
     volumes:
       - type: volume
         source: builddata
-        target: /tmp
+        target: /builddata
 volumes:
   builddata:
 
