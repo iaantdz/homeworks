@@ -1,5 +1,5 @@
 ---
-version: "3.9"
+version: "3"
 services:
   builder:
     build: maven-app
@@ -11,3 +11,4 @@ services:
       - build:/tmp
 volumes:
   build:
+    external: true
