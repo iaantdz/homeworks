@@ -1,0 +1,13 @@
+---
+version: "3.9"
+services:
+  builder:
+    build: maven-app
+    volumes:
+      - build:/tmp
+  runner:
+    build: tomcat-app
+    volumes:
+      - build:/tmp
+volumes:
+  build:
