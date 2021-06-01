@@ -8,3 +8,5 @@ RUN /bin/bash -c 'cd /tmp;\
 	mvn package;\
 	cp /tmp/boxfuse-sample-java-war-hello/target/hello-1.0.war /tmp/'
 
+CMD "bash"
+
