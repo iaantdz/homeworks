@@ -9,6 +9,7 @@ services:
     build: tomcat-app
     volumes:
       - build:/tmp
+    volumes_from:
+      - builder
 volumes:
   build:
-    external: true
