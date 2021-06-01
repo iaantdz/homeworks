@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+VOLUME /tmp
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 RUN  apt-get update && apt -y install default-jdk tomcat9 maven git
