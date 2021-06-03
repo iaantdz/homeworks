@@ -17,5 +17,6 @@ services:
         target: /tmp/builddata
 volumes:
   builddata:
-
+      - type: volume
+        source: /tmp
 
