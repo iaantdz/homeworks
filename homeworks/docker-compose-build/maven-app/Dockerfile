@@ -1,4 +1,5 @@
 FROM ubuntu:20.04
+RUN mkdir /tmp/builddata -p
 VOLUME builddata:/tmp/builddata
 ENV TZ=Europe/Moscow
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
