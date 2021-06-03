@@ -7,14 +7,14 @@ services:
     volumes:
       - type: volume
         source: builddata
-        target: /tmp/
+        target: /tmp/boxfuse-sample-java-war-hello/target/
 
   runner:
     build: tomcat-app
     volumes:
       - type: volume
         source: builddata
-        target: /tmp/
+        target: /usr/local/tomcat/webapps/
     depends_on:
       - bldr
 
