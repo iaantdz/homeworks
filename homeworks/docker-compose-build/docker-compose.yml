@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: '3'
 
 services:
   builder:
@@ -7,14 +7,14 @@ services:
     volumes:
       - type: volume
         source: builddata
-        target: /tmp
+        target: /tmp/builddata
 
   runner:
     build: tomcat-app
     volumes:
       - type: volume
         source: builddata
-        target: /tmp
+        target: /tmp/builddata
 volumes:
   builddata:
 

@@ -1,2 +1,3 @@
 FROM tomcat:9-jdk16
-RUN cp /tmp/hello-1.0.war /usr/local/tomcat/webapps/
+VOLUME builddata:/tmp/builddata
+RUN cp /tmp/builddata/hello-1.0.war /usr/local/tomcat/webapps/
