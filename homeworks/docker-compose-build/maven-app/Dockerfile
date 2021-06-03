@@ -8,4 +8,3 @@ RUN /bin/bash -c 'cd /tmp;\
 	mvn package'
 
 
-

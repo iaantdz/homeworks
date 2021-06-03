@@ -10,7 +10,9 @@ services:
         target: /tmp/boxfuse-sample-java-war-hello/target/
 
   runner:
-    build: tomcat-app
+    image: tomcat:9-alpine
+    ports:
+      - "8080:8080"
     volumes:
       - type: volume
         source: builddata
