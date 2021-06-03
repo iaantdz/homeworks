@@ -2,7 +2,7 @@
 version: '3'
 
 services:
-  builder:
+  bldr:
     build: maven-app
     volumes:
       - type: volume
@@ -16,7 +16,7 @@ services:
         source: builddata
         target: /tmp/
     depends_on:
-      builder:
+      - blrd
 
 
 volumes:
