@@ -1,18 +1,26 @@
 ---
-version: '3.7'
+version: '3'
 
 services:
   builder:
     build: maven-app
     volumes:
-      - ./share:/tmp/share
+      - type: volume
+        source: builddata
+        target: /tmp/
 
   runner:
     build: tomcat-app
     volumes:
-      - ./share:/tmp/share
+      - type: volume
+        source: builddata
+        target: /tmp/
+    depends_on:
+      builder:
 
 
+volumes:
+  builddata:
 
 
 
