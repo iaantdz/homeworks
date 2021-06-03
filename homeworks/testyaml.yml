@@ -1,0 +1,26 @@
+---
+mechta:
+  otdely:
+    - 1
+     olgi: 4
+      prof: buh
+     dmitrii: 3
+     ivany: 2
+    - 2
+      romany: 4
+        prof: jurist
+      maximy:
+        prof: vodyatel
+    - 3
+     ivany: 1
+       prof: builder
+     nikolai:
+       prof: builder
+     olgi: 1
+       prof: jurist
+    - 4_5
+      julii: 5
+        prof: clerk
+    - 6
+      igori: 1
+        prof: useless
