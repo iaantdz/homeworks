@@ -5,21 +5,14 @@ services:
   builder:
     build: maven-app
     volumes:
-      - /tmp
-      - type: volume
-        source: builddata
-        target: /tmp/
+      - ./share:/tmp/share
 
   runner:
     build: tomcat-app
     volumes:
-      - /tmp
-      - type: volume
-        source: builddata
-        target: /tmp/
+      - ./share:/tmp/share
 
-volumes:
-  builddata:
-    name: builddata
+
+
 
 
