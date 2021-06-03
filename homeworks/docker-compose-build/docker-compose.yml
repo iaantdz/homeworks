@@ -16,7 +16,7 @@ services:
         source: builddata
         target: /tmp/
     depends_on:
-      - blrd
+      - bldr
 
 
 volumes:
