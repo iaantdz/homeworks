@@ -6,14 +6,14 @@ services:
     build: maven-app
     volumes:
       - type: volume
-        source: builddata
+        source: /tmp
         target: /tmp/builddata
 
   runner:
     build: tomcat-app
     volumes:
       - type: volume
-        source: builddata
+        source: /tmp
         target: /tmp/builddata
 volumes:
   builddata:
