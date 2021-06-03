@@ -9,7 +9,7 @@ services:
       - type: volume
         source: builddata
         target: /tmp/
-        nocopy: true
+          nocopy: true
 
   runner:
     build: tomcat-app
