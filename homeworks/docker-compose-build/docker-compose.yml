@@ -8,15 +8,15 @@ services:
       - type: volume
         source: builddata
         target: /tmp/
-
+        volume:
+          nocopy: true
   runner:
     build: tomcat-app
     volumes:
       - type: volume
         source: builddata
         target: /tmp/
-        volume:
-          nocopy: true
+
 volumes:
   builddata:
 
