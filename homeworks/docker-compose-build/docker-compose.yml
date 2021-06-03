@@ -5,14 +5,15 @@ services:
   builder:
     build: maven-app
     volumes:
-      - type: bind
-        source: /tmp
-        target: /tmp/builddata
+      - builddata:/tmp/builddata
 
   runner:
     build: tomcat-app
     volumes:
-      - type: bind
-        source: /tmp
-        target: /tmp/builddata
+       - builddata:/tmp/builddata
+       volume:
+         nocopy: true
+volumes:
+  builddata:
+
 
