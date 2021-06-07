@@ -14,11 +14,7 @@
     - name: build container image
       shell: "cd /tmp;docker build . -t hello"
     - name: archive docker image
-      docker_image:
-        name:
-        archive_path: /tmp/helloworld.tar
-        source: pull
-        state: present
+      shell: "docker save -o /tmp/helloworld.tar hello"
     - name: download image
       fetch:
         src: /tmp/helloworld.tar

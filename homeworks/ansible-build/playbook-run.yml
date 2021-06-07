@@ -11,10 +11,6 @@
         dest: /tmp/helloworld.tar
 
     - name: load image
-      docker_image:
-        name: hello
-        load_path: /tmp/helloworld.tar
-        state: present
-        source: load
+      shell: "docker load -i /tmp/helloworld.tar"
     - name: run container
       shell: "docker run -d -p 8080:8080 hello"
