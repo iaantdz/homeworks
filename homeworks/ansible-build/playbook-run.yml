@@ -1,5 +1,10 @@
 - hosts: runhost
   tasks:
+    - name: ensure docker installed
+      apt:
+        name: docker.io
+        state: present
+
     - name: upload tarball
       copy:
         src: ./helloworld.tar
