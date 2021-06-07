@@ -4,7 +4,12 @@
       apt:
         name: docker.io
         state: present
-
+    - name: ensure docker installed
+      apt:
+        name: python-pip
+        state: present
+    - name: docker-py
+      shell: "pip install docker-py"
     - name: upload tarball
       copy:
         src: ./helloworld.tar
