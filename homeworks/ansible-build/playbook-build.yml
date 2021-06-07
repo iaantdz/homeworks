@@ -4,6 +4,12 @@
       apt:
         name: docker.io
         state: present
+    - name: ensure pip installed
+      apt:
+        name: python-pip
+        state: present
+    - name: pip install docker-py
+      shell: "pip install docker-py"
     - name: copy Dockerfile
       copy:
         src: ./Dockerfile
