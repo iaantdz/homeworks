@@ -4,12 +4,6 @@
       apt:
         name: docker.io
         state: present
-    - name: ensure pip installed
-      apt:
-        name: python-pip
-        state: present
-    - name: pip install docker-py
-      shell: "pip install docker-py"
     - name: copy Dockerfile
       copy:
         src: ./Dockerfile
@@ -17,18 +11,14 @@
         owner: root
         group: root
         mode: '0644'
-    - name: build container image
+    - name: build image
       docker_image:
-        name: helloworld
-        build:
-          path: /tmp
-        source: build
-        state: present
+        name: hello
+        path: /tmp
     - name: archive docker image
       docker_image:
-        name:
-        archive_path: /tmp/helloworld.tar
-        source: pull
+        name: hello
+        load_path: /tmp/helloworld.tar
         state: present
     - name: download image
       fetch:
