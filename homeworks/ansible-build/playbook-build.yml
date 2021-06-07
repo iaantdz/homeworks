@@ -15,9 +15,8 @@
       docker_image:
         name: helloworld
         build:
-          path: /tmp/Dockerfile
-          source: build
-        state: present
+          dockerfile: /tmp/Dockerfile
+          state: present
     - name: archive docker image
       docker_image:
         name:
