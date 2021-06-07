@@ -19,6 +19,7 @@
       docker_image:
         name: hello
         archive_path: /tmp/helloworld.tar
+        timeout: 600
     - name: download image
       fetch:
         src: /tmp/helloworld.tar
