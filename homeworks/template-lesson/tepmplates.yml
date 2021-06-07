@@ -1,0 +1,20 @@
+---
+- name: templating
+  hosts: all
+  become: yes
+
+  var:
+    source_folder: ./
+    dest_folder: /var/www/html/
+
+  tasks:
+    - name: nginx
+      apt: name=nginx state=present
+
+    - name: templating
+      template: src={{ source_folder }}/index.j2 {{ dest_folder }}/index.j2 mode=055
+      notify: restnginx
+
+  handlers:
+    - name: restnginx
+      service: name=nginx state=restarted

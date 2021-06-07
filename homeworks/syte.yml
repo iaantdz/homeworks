@@ -8,9 +8,9 @@
       apt:
         name: nginx
         state: present
-    - name: index.html is hese
+    - name: index.j2 is hese
       copy:
-        src: index.html
+        src: index.j2
         dest: /var/www/html
     - name: Ensure nginx is running
       service:
