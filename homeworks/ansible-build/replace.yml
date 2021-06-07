@@ -3,8 +3,6 @@
       - name: Replace
         lineinfile:
           path: /var/www/html/index.nginx-debian.html
-          search_string: 'Welcome to nginx!'
+          regexp: 'Welcome to nginx!'
           line: <p><script> document.write (new Date().toLocaleDateString()); </script></p>
-          owner: root
-          group: root
-          mode: '0644'
+
