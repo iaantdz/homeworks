@@ -16,6 +16,7 @@
         name: helloworld
         build:
           path: /tmp
+        source: build
         state: present
     - name: archive docker image
       docker_image:
