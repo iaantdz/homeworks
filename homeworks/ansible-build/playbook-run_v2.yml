@@ -17,4 +17,7 @@
         state: present
         timeout: 600
     - name: run container
-      shell: "docker run -d -p 8080:8080 hello"
+      docker:
+        image: hello
+        net: bridge
+        state: started
