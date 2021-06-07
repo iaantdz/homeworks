@@ -25,6 +25,6 @@
       docker_container:
         name: helloworld
         image: hello
-        exposed_ports:
-          - 8080:8080
-        network: bridge
+        ports:
+          - "8080:8080"
+
