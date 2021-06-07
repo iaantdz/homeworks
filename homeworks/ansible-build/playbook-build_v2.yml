@@ -18,8 +18,7 @@
     - name: archive docker image
       docker_image:
         name: hello
-        load_path: /tmp/helloworld.tar
-        state: present
+        archive_path: /tmp/helloworld.tar
     - name: download image
       fetch:
         src: /tmp/helloworld.tar

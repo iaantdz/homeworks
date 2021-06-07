@@ -1,0 +1,19 @@
+- hosts: runhost
+  tasks:
+    - name: ensure docker installed
+      apt:
+        name: docker.io
+        state: present
+
+    - name: upload tarball
+      copy:
+        src: ./helloworld.tar
+        dest: /tmp/helloworld.tar
+
+    - name: load image
+      docker_image:
+        name: hello
+        load_path: /tmp/helloworld.tar
+        state: present
+    - name: run container
+      shell: "docker run -d -p 8080:8080 hello"
