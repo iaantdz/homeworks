@@ -22,8 +22,9 @@
         state: present
         timeout: 600
     - name: run container
-      docker:
+      docker_container:
+        name: helloworld
         image: hello
         net: bridge
+        published_ports: 8080:8080
         state: started
-        ports: 8080:8080
