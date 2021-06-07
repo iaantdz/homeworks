@@ -1,0 +1,15 @@
+- hosts: runhost
+  tasks:
+    - name: upload tarball
+      copy:
+        src: ./helloworld.tar
+        dest: /tmp/helloworld.tar
+
+    - name: load image
+      docker_image:
+        name: hello
+        load_path: /tmp/helloworld.tar
+        state: present
+        source: load
+    - name: run container
+      shell: "docker run -d hello"

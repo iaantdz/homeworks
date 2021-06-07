@@ -1,0 +1,31 @@
+- hosts: buildhost
+  tasks:
+    - name: ensure docker installed
+      apt:
+        name: docker.io
+        state: present
+    - name: copy Dockerfile
+      copy:
+        src: ./Dockerfile
+        dest: /tmp/Dockerfile
+        owner: root
+        group: root
+        mode: '0644'
+    - name: build container image
+      docker_image:
+        name: helloworld
+        build:
+          path: /tmp/Dockerfile
+          source: build
+        state: present
+    - name: archive docker image
+      docker_image:
+        name:
+        archive_path: /tmp/helloworld.tar
+        source: pull
+        state: present
+    - name: download image
+      fetch:
+        src: /tmp/helloworld.tar
+        dest: ./helloworld.tar
+        flat: true
