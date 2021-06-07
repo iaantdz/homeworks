@@ -12,4 +12,4 @@
         state: present
         source: load
     - name: run container
-      shell: "docker run -d hello"
+      shell: "docker run -d -p 8080:8080 hello"
