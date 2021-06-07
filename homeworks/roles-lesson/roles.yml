@@ -1,0 +1,16 @@
+- name: web serv
+  hosts: web
+  become: yes
+
+  roles: 
+    - common
+    - webserver
+    - security
+
+- name: db serv
+  hosts: db
+  become: yes
+
+  roles:
+    - common
+    - security

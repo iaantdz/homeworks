@@ -1,0 +1,6 @@
+---
+# defaults file for webserver
+
+dest_folder: /var/www/html
+
+
