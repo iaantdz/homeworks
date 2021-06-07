@@ -3,7 +3,7 @@
   hosts: all
   become: yes
 
-  var:
+  vars:
     source_folder: ./
     dest_folder: /var/www/html/
 
