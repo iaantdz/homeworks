@@ -1,4 +1,4 @@
-- hosts: buildhost
+- hosts: runhost
   tasks:
       - name: Replace
         lineinfile:
