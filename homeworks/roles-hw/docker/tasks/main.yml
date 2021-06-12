@@ -14,13 +14,13 @@
     state: present
 - name: send image
   copy:
-    src: {{ host_img_dump }}
-    dest: {{ img_dump }}
+    src: "/tmp/{{ host_img_dump }}"
+    dest: "/tmp/{{ img_dump }}"
 
 - name: load image
   docker_image:
     name: hello
-    load_path: {{ img_dump }}
+    load_path: "/tmp/{{ img_dump }}"
     state: present
     timeout: 600
 - name: run container

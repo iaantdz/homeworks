@@ -17,9 +17,9 @@
 - name: archive docker image
   docker_image:
     name: hello
-    archive_path: {{ img_dump }}
+    archive_path: "/tmp/{{ img_dump }}"
     timeout: 600
 - name: copy archive
   fetch:
-    src: {{ img_dump }}
+    src: "/tmp/{{ img_dump }}"
     dest: /tmp
