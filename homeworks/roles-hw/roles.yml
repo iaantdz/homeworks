@@ -1,0 +1,13 @@
+- name: build server
+  hosts: msl2
+  become: yes
+
+  roles: 
+    - builder
+
+- name: app server
+  hosts: msl3
+  become: yes
+
+  roles:
+    - docker
