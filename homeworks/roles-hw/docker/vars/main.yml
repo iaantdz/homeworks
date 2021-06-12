@@ -1,2 +1,4 @@
 ---
 # vars file for docker
+img_dump: /tmp/helloworld.tar
+host_img_dump: /tmp/msl2/tmp/helloworld.tar

@@ -9,16 +9,18 @@
     name: python-pip
     state: present
 - name: docker-py
-  shell: "pip install docker-py"
+  pip:
+    name: docker-py
+    state: present
 - name: send image
   copy:
-    src: /tmp/msl2/tmp/helloworld.tar
-    dest: /tmp/helloworld.tar
+    src: {{ host_img_dump }}
+    dest: {{ img_dump }}
 
 - name: load image
   docker_image:
     name: hello
-    load_path: /tmp/helloworld.tar
+    load_path: { {  img_dump } }
     state: present
     timeout: 600
 - name: run container

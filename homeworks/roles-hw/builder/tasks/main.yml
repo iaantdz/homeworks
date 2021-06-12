@@ -17,9 +17,9 @@
 - name: archive docker image
   docker_image:
     name: hello
-    archive_path: /tmp/helloworld.tar
+    archive_path: { { img_dump } }
     timeout: 600
 - name: copy archive
   fetch:
-    src: /tmp/helloworld.tar
+    src: { { img_dump } }
     dest: /tmp
