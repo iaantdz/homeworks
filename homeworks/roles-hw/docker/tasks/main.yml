@@ -20,7 +20,7 @@
 - name: load image
   docker_image:
     name: hello
-    load_path: { {  img_dump } }
+    load_path: {{ img_dump }}
     state: present
     timeout: 600
 - name: run container
