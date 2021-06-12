@@ -1,0 +1,25 @@
+---
+- name: ensure docker installed
+  apt:
+    name: docker.io
+    state: present
+- name: copy Dockerfile
+  copy:
+   src: Dockerfile
+   dest: /tmp/Dockerfile
+   owner: root
+   group: root
+   mode: '0644'
+- name: build image
+  docker_image:
+   name: hello
+   path: /tmp
+- name: archive docker image
+  docker_image:
+    name: hello
+    archive_path: /tmp/helloworld.tar
+    timeout: 600
+- name: copy archive
+  fetch:
+    src: /tmp/helloworld.tar
+    dest: /tmp

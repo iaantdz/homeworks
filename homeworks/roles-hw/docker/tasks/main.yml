@@ -1,0 +1,29 @@
+---
+# tasks file for docker
+- name: ensure docker installed
+  apt:
+    name: docker.io
+    state: present
+- name: ensure docker installed
+  apt:
+    name: python-pip
+    state: present
+- name: docker-py
+  shell: "pip install docker-py"
+- name: send image
+  copy:
+    src: /tmp/msl2/tmp/helloworld.tar
+    dest: /tmp/helloworld.tar
+
+- name: load image
+  docker_image:
+    name: hello
+    load_path: /tmp/helloworld.tar
+    state: present
+    timeout: 600
+- name: run container
+  docker_container:
+    name: helloworld
+    image: hello
+    ports:
+      - "8080:8080"
