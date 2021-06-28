@@ -24,9 +24,12 @@ services:
       - "8514:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
+    volumes:
+      - mariadb:/var/lib/mysql    
 
 
 volumes:
   builddata:
+  mariadb:
 
 
