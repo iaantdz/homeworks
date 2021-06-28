@@ -17,6 +17,7 @@ services:
       - builddata:/usr/local/tomcat/webapps/
     depends_on:
       - bldr
+      - db
 
   db:
     image: mariadb:10.1
