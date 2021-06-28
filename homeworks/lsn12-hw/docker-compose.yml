@@ -3,22 +3,18 @@ version: '3'
 
 services:
   bldr:
-    build: maven-app
+    build: myapp
     volumes:
-      - type: volume
-        source: builddata
-        target: /tmp/App42PaaS-Java-MySQL-Sample/target/
+      - builddata:/tmp/App42PaaS-Java-MySQL-Sample/target/
 
   runner:
-    image: tomcat:9-alpine
+    build: tomcat
     ports:
       - "8080:8080"
     links:
       - db
     volumes:
-      - type: volume
-        source: builddata
-        target: /usr/local/tomcat/webapps/
+      - builddata:/usr/local/tomcat/webapps/
     depends_on:
       - bldr
 
@@ -28,8 +24,6 @@ services:
       - "8514:3306"
     environment:
       - MYSQL_ROOT_PASSWORD=secret
-    volumes:
-      - mysql:/var/lib/mysql
 
 
 volumes:
