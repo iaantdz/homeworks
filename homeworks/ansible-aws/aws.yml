@@ -1,0 +1,133 @@
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    ec2_access_key: "{{ my_key }}"
+    ec2_secret_key: "{{ my_sec }}"
+    instance_type: "t2.micro"
+    image: "ami-00399ec92321828f5"
+    group: "mygroup1"
+    region: "us-east-2"
+
+  tasks:
+    - name: create builder
+      ec2: 
+        image: "{{ image }}"
+        instance_type: "{{ instance_type }}"
+        aws_access_key: "{{ ec2_access_key }}"
+        aws_secret_key: "{{ ec2_secret_key }}"
+        instance_tags:
+          Name: "builder"
+        region: "{{ region }}"
+        group: "{{ group }}"
+        wait: true
+        key_name:  lsn132
+      register: ec2
+
+    - name: Add builder to hosts file
+      lineinfile: dest=/etc/hosts
+                  regexp={{ item.public_ip }} 
+                  line="{{ item.public_ip }} builder"
+                  state=present
+      with_items: "{{ec2.instances}}"      
+    
+    - name: Add IP to builder group
+      add_host: hostname={{ item.public_ip }} groups=builder 
+      with_items: "{{ec2.instances}}"      
+
+    - name: create runner
+      ec2: 
+        image: "{{ image }}"
+        instance_type: "{{ instance_type }}"
+        aws_access_key: "{{ ec2_access_key }}"
+        aws_secret_key: "{{ ec2_secret_key }}"
+        instance_tags: 
+          Name: "runner"
+        region: "{{ region }}"
+        group: "{{ group }}"
+        wait: true
+        key_name:  lsn132
+      register: ec2
+
+    - name: Add runner to hosts file
+      lineinfile: dest=/etc/hosts
+                  regexp={{ item.public_ip }} 
+                  line="{{ item.public_ip }} runner"
+                  state=present
+      with_items: "{{ec2.instances}}"      
+
+    - name: Add IP to runner group
+      add_host: hostname={{ item.public_ip }} groups=runner 
+      with_items: "{{ec2.instances}}"      
+
+- hosts: builder
+  gather_facts: True
+  become: yes
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: /root/.ssh/aws.pem
+  tasks:
+    - name: ensure docker installed
+      apt:
+        name: docker.io
+        state: present
+    - name: copy Dockerfile
+      copy:
+        src: Dockerfile
+        dest: /tmp/Dockerfile
+        owner: root
+        group: root
+        mode: '0644'
+    - name: build image
+      docker_image:
+        name: hello
+        path: /tmp
+    - name: archive docker image
+      docker_image:
+        name: hello
+        archive_path: "/tmp/{{ img_dump }}"
+        timeout: 600
+    - name: copy archive
+      fetch:
+        src: "/tmp/{{ img_dump }}"
+        dest: /tmp
+
+
+- hosts: runner
+  gather_facts: True
+  become: yes
+  remote_user: ubuntu
+  vars:
+    ansible_ssh_private_key_file: /root/.ssh/aws.pem
+  tasks:
+    - name: ensure docker installed
+      apt:
+        name: docker.io
+        state: present
+    - name: ensure docker installed
+      apt:
+        name: python-pip
+        state: present
+    - name: docker-py
+      pip:
+        name: docker-py
+        state: present
+    
+    - name: upload tarball
+      copy:
+        src: ./helloworld.tar
+        dest: /tmp/helloworld.tar
+
+    - name: load image
+      docker_image:
+        name: hello
+        load_path: /tmp/helloworld.tar
+        state: present
+        timeout: 600
+    - name: run container
+      docker_container:
+        name: helloworld
+        image: hello
+        ports:
+          - "8080:8080"
+
